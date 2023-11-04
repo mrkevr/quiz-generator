@@ -1,7 +1,6 @@
 package dev.mrkevr.quizgenerator.service;
 
 import java.awt.Color;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -23,21 +22,19 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class QuizPDFExporter {
-	
+
 	private final ExcelDataExtractor excelDataExtractor;
-	
-	public void exportDocument(HttpServletResponse response, File file)
-			throws DocumentException, IOException {
-		
-		// Extract questions from the excel file
-		List<Question> questions = excelDataExtractor.extract(file);
+
+	public void exportDocument(HttpServletResponse response, String id) throws DocumentException, IOException {
+
+		List<Question> questions = excelDataExtractor.extract(id);
 
 		Document document = new Document(PageSize.A4);
 		PdfWriter.getInstance(document, response.getOutputStream());
 
 		document.open();
 		Font font = this.getFont();
-		
+
 		// Quiz Header
 		Paragraph p1 = new Paragraph("Name : ", font);
 		p1.setAlignment(Paragraph.ALIGN_LEFT);
@@ -46,12 +43,22 @@ public class QuizPDFExporter {
 		p2.setAlignment(Paragraph.ALIGN_LEFT);
 		document.add(p2);
 		document.add(Chunk.NEWLINE);
-		
+
 		// Questions
+		int[] itemNumber = { 1 };
 		questions.forEach(question -> {
-			Paragraph questionStr = new Paragraph(question.getQuestion(), font);
+			Paragraph questionStr = new Paragraph(itemNumber[0] + ". " + question.getQuestion(), font);
+			Paragraph a = new Paragraph("(a) " + question.getA(), font);
+			Paragraph b = new Paragraph("(b) " + question.getB(), font);
+			Paragraph c = new Paragraph("(c) " + question.getC(), font);
+			Paragraph d = new Paragraph("(d) " + question.getD(), font);
 			document.add(questionStr);
+			document.add(a);
+			document.add(b);
+			document.add(c);
+			document.add(d);
 			document.add(Chunk.NEWLINE);
+			itemNumber[0]++;
 		});
 
 		document.close();
@@ -59,7 +66,7 @@ public class QuizPDFExporter {
 
 	private Font getFont() {
 		Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-		font.setSize(10);
+		font.setSize(8);
 		font.setColor(Color.BLACK);
 		return font;
 	}
