@@ -48,10 +48,14 @@ public class QuizPDFExporter {
 		int[] itemNumber = { 1 };
 		questions.forEach(question -> {
 			Paragraph questionStr = new Paragraph(itemNumber[0] + ". " + question.getQuestion(), font);
-			Paragraph a = new Paragraph("(a) " + question.getA(), font);
-			Paragraph b = new Paragraph("(b) " + question.getB(), font);
-			Paragraph c = new Paragraph("(c) " + question.getC(), font);
-			Paragraph d = new Paragraph("(d) " + question.getD(), font);
+			Paragraph a = new Paragraph("a. " + question.getA(), font);
+			a.setIndentationLeft(15);
+			Paragraph b = new Paragraph("b. " + question.getB(), font);
+			b.setIndentationLeft(15);
+			Paragraph c = new Paragraph("c. " + question.getC(), font);
+			c.setIndentationLeft(15);
+			Paragraph d = new Paragraph("d. " + question.getD(), font);
+			d.setIndentationLeft(15);
 			document.add(questionStr);
 			document.add(a);
 			document.add(b);

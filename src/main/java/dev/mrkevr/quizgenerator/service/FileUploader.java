@@ -15,11 +15,12 @@ import lombok.RequiredArgsConstructor;
 public class FileUploader {
 
 	private final String UPLOAD_DIR = Paths.get("src/main/resources/files").toAbsolutePath().toString();
-	
+
 	public String uploadFile(MultipartFile file, String fileName) {
 
 		try {
-			Files.copy(file.getInputStream(),
+			Files.copy(
+					file.getInputStream(),
 					Paths.get(UPLOAD_DIR + File.separator + fileName + this.getFileExtension(file.getOriginalFilename())),
 					StandardCopyOption.REPLACE_EXISTING);
 		} catch (Exception e) {
@@ -29,10 +30,10 @@ public class FileUploader {
 		return fileName;
 	}
 
-	public boolean fileExists(MultipartFile multipartFile) {
+	public boolean fileExists(String fileName) {
 		boolean isExist = false;
 		try {
-			File file = new File(UPLOAD_DIR + multipartFile.getOriginalFilename());
+			File file = new File(UPLOAD_DIR + "/" + fileName + ".xlsx");
 			isExist = file.exists();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -42,9 +43,6 @@ public class FileUploader {
 
 	/**
 	 * Removes all characters before the last 'DOT' from the name.
-	 * 
-	 * @param name as the file name
-	 * @return the extension of the file.
 	 */
 	public String getFileExtension(String name) {
 		String extension;
