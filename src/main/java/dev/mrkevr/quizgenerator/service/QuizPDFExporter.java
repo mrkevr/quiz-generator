@@ -13,6 +13,9 @@ import com.lowagie.text.Font;
 import com.lowagie.text.FontFactory;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
+import com.lowagie.text.Rectangle;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
 import dev.mrkevr.quizgenerator.dto.Question;
@@ -44,24 +47,42 @@ public class QuizPDFExporter {
 		document.add(p2);
 		document.add(Chunk.NEWLINE);
 
+//		// Questions
+//		int[] itemNumber = { 1 };
+//		questions.forEach(question -> {
+//			Paragraph questionStr = new Paragraph(itemNumber[0] + ". " + question.getQuestion(), font);
+//			Paragraph a = new Paragraph("a. " + question.getA(), font);
+//			a.setIndentationLeft(15);
+//			Paragraph b = new Paragraph("b. " + question.getB(), font);
+//			b.setIndentationLeft(15);
+//			Paragraph c = new Paragraph("c. " + question.getC(), font);
+//			c.setIndentationLeft(15);
+//			Paragraph d = new Paragraph("d. " + question.getD(), font);
+//			d.setIndentationLeft(15);
+//			document.add(questionStr);
+//			document.add(a);
+//			document.add(b);
+//			document.add(c);
+//			document.add(d);
+//			document.add(Chunk.NEWLINE);
+//			itemNumber[0]++;
+//		});
+
 		// Questions
 		int[] itemNumber = { 1 };
 		questions.forEach(question -> {
 			Paragraph questionStr = new Paragraph(itemNumber[0] + ". " + question.getQuestion(), font);
-			Paragraph a = new Paragraph("a. " + question.getA(), font);
-			a.setIndentationLeft(15);
-			Paragraph b = new Paragraph("b. " + question.getB(), font);
-			b.setIndentationLeft(15);
-			Paragraph c = new Paragraph("c. " + question.getC(), font);
-			c.setIndentationLeft(15);
-			Paragraph d = new Paragraph("d. " + question.getD(), font);
-			d.setIndentationLeft(15);
+			
+			// Create 2 columns in table.
+			PdfPTable table = new PdfPTable(2);
+			// Add cells in table
+			table.addCell(this.convertToChoiceCell(new Paragraph("a) " + question.getA(), font)));
+			table.addCell(this.convertToChoiceCell(new Paragraph("b) " + question.getB(), font)));
+			table.addCell(this.convertToChoiceCell(new Paragraph("c) " + question.getC(), font)));
+			table.addCell(this.convertToChoiceCell(new Paragraph("d) " + question.getD(), font)));
+
 			document.add(questionStr);
-			document.add(a);
-			document.add(b);
-			document.add(c);
-			document.add(d);
-			document.add(Chunk.NEWLINE);
+			document.add(table);
 			itemNumber[0]++;
 		});
 
@@ -73,5 +94,13 @@ public class QuizPDFExporter {
 		font.setSize(8);
 		font.setColor(Color.BLACK);
 		return font;
+	}
+
+	private PdfPCell convertToChoiceCell(Paragraph paragraph) {
+		// Create cell
+		PdfPCell cell = new PdfPCell(paragraph);
+		// Remove border from the cell
+		cell.setBorder(Rectangle.NO_BORDER);
+		return cell;
 	}
 }
