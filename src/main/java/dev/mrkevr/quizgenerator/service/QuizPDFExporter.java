@@ -47,27 +47,6 @@ public class QuizPDFExporter {
 		document.add(p2);
 		document.add(Chunk.NEWLINE);
 
-//		// Questions
-//		int[] itemNumber = { 1 };
-//		questions.forEach(question -> {
-//			Paragraph questionStr = new Paragraph(itemNumber[0] + ". " + question.getQuestion(), font);
-//			Paragraph a = new Paragraph("a. " + question.getA(), font);
-//			a.setIndentationLeft(15);
-//			Paragraph b = new Paragraph("b. " + question.getB(), font);
-//			b.setIndentationLeft(15);
-//			Paragraph c = new Paragraph("c. " + question.getC(), font);
-//			c.setIndentationLeft(15);
-//			Paragraph d = new Paragraph("d. " + question.getD(), font);
-//			d.setIndentationLeft(15);
-//			document.add(questionStr);
-//			document.add(a);
-//			document.add(b);
-//			document.add(c);
-//			document.add(d);
-//			document.add(Chunk.NEWLINE);
-//			itemNumber[0]++;
-//		});
-
 		// Questions
 		int[] itemNumber = { 1 };
 		questions.forEach(question -> {

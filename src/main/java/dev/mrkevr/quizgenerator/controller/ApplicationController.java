@@ -2,7 +2,6 @@ package dev.mrkevr.quizgenerator.controller;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -52,7 +51,7 @@ public class ApplicationController {
 			.timestamp(LocalDateTime.now())
 			.status(HttpStatus.OK.value())
 			.message("File uploaded and ready for download")
-			.body(Map.of("Download URL", "http://localhost:8080/download?id=" + fileId))
+			.downloadUrl("http://localhost:8080/download?id=" + fileId)
 			.build());
 	}
 

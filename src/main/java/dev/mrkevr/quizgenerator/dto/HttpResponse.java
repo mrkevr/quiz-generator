@@ -1,7 +1,6 @@
 package dev.mrkevr.quizgenerator.dto;
 
 import java.time.LocalDateTime;
-import java.util.Map;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -19,5 +18,5 @@ public class HttpResponse {
 	
 	String message;
 	
-	Map<String, Object> body;
+	String downloadUrl;
 }
