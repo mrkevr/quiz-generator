@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,9 +15,13 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class FileUploader {
-
-	private final String UPLOAD_DIR = Paths.get("src/main/resources/files").toAbsolutePath().toString();
-
+	
+	
+//	private final String UPLOAD_DIR = Paths.get("src/main/resources/files").toAbsolutePath().toString();
+	
+	@Value("${file.directory}")
+	private String UPLOAD_DIR;
+	
 	public String uploadFile(MultipartFile file, String fileName) {
 		
 		// File validation

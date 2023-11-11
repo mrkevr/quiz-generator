@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,9 @@ public class ApplicationController {
 
 	private final QuizPDFExporter quizPDFExporter;
 	private final FileUploader fileUploader;
+	
+	@Value("server.port")
+	private String port;
 	
 	@PostMapping(value = "/upload", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
 	public ResponseEntity<HttpResponse> generate(

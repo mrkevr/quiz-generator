@@ -4,8 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.poiji.bind.Poiji;
@@ -17,22 +16,21 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class ExcelDataExtractor {
-
+	
 	private final FileUploader fileUploader;
-
-	public List<Question> extract(String fileName) {
+	
+	@Value("${file.directory}")
+	private String UPLOAD_DIR;
+	
+	public List<Question> extract(String fileName) throws IOException {
 
 		if (!fileUploader.fileExists(fileName)) {
 			throw new FileNotFoundException(fileName);
 		}
 
-		Resource resource = new ClassPathResource("files/" + fileName + ".xlsx");
-		try {
-			File file = resource.getFile();
-			return Poiji.fromExcel(file, Question.class);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
+		//		Resource resource = new ClassPathResource("files/" + fileName + ".xlsx");
+		//			File file = resource.getFile();
+					File file = new File(UPLOAD_DIR + "/" + fileName + ".xlsx");
+					return Poiji.fromExcel(file, Question.class);
 	}
 }
