@@ -34,6 +34,6 @@ java -jar quiz-generator-0.0.1-SNAPSHOT.jar --file.directory=C:/Your/File/Direct
 
 - Once the application runs you should see something like this :
 ```
-2023-11-11T14:33:27.371+08:00  INFO 7736 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2023-11-11T14:33:27.390+08:00  INFO 7736 --- [           main] d.m.q.QuizGeneratorApplication           : Started QuizGeneratorApplication in 2.722 seconds (process running for 3.218)
+2023-11-11T14:33:27.371+08:00  INFO 7736 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-11-11T14:33:27.390+08:00  INFO 7736 --- [main] d.m.q.QuizGeneratorApplication           : Started QuizGeneratorApplication in 2.722 seconds (process running for 3.218)
 ```
