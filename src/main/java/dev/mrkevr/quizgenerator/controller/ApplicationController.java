@@ -29,7 +29,10 @@ public class ApplicationController {
 	private final FileUploader fileUploader;
 	
 	@PostMapping(value = "/upload", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-	public ResponseEntity<HttpResponse> generate(@RequestParam("file") MultipartFile file, HttpServletResponse response)
+	public ResponseEntity<HttpResponse> generate(
+			@RequestParam(name = "file", required = true) MultipartFile file, 
+			@RequestParam(name = "title", required = false) String title,
+			HttpServletResponse response)
 			throws IOException {
 		
 		// Upload
@@ -40,19 +43,22 @@ public class ApplicationController {
 			.timestamp(LocalDateTime.now())
 			.status(HttpStatus.OK.value())
 			.message("File uploaded and ready for download")
-			.downloadUrl("http://localhost:8080/download?id=" + fileId)
+			.downloadUrl("http://localhost:8080/download?id=" + fileId + (title != null ? "&title=" + title : ""))
 			.build());
 	}
 
 	@GetMapping(value = "/download")
-	public ResponseEntity<HttpResponse> downloadQuiz(@RequestParam(name = "id", required = true) String id, HttpServletResponse response)	
+	public ResponseEntity<HttpResponse> downloadQuiz(
+			@RequestParam(name = "title", required = false) String title,
+			@RequestParam(name = "id", required = true) String id, 
+			HttpServletResponse response)	
 			throws DocumentException, IOException {
 
 		response.setContentType("application/pdf");
 		String headerKey = "Content-Disposition";
 		String headerValue = "attachment; filename=quiz_" + id + ".pdf";
 		response.setHeader(headerKey, headerValue);
-		quizPDFExporter.exportDocument(response, id);
+		quizPDFExporter.exportDocument(response, id, title);
 		return null;
 	}
 }

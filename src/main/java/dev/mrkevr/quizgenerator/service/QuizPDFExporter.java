@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.FontFactory;
 import com.lowagie.text.PageSize;
@@ -28,7 +29,7 @@ public class QuizPDFExporter {
 
 	private final ExcelDataExtractor excelDataExtractor;
 
-	public void exportDocument(HttpServletResponse response, String id) throws DocumentException, IOException {
+	public void exportDocument(HttpServletResponse response, String id, String title) throws DocumentException, IOException {
 
 		List<Question> questions = excelDataExtractor.extract(id);
 
@@ -37,24 +38,33 @@ public class QuizPDFExporter {
 
 		document.open();
 		Font font = this.getFont();
-
-		// Quiz Header
-		Paragraph p1 = new Paragraph("Name : ", font);
-		p1.setAlignment(Paragraph.ALIGN_LEFT);
-		document.add(p1);
-		Paragraph p2 = new Paragraph("Date : ", font);
-		p2.setAlignment(Paragraph.ALIGN_LEFT);
-		document.add(p2);
+		
+		// Add title if specified
+		if (title != null) {
+			Paragraph titleParagraph = new Paragraph(title, font);
+			titleParagraph.setAlignment(Element.ALIGN_CENTER);
+			document.add(titleParagraph);
+			document.add(Chunk.NEWLINE);
+		}
+		
+		// Header 
+		Paragraph formParagraph = new Paragraph("Name : __________________________________________________   Date : _________________________   Sccore : ________", font);
+		formParagraph.setAlignment(Paragraph.ALIGN_LEFT);
+		document.add(formParagraph);
+		document.add(Chunk.NEWLINE);
+		Paragraph directionParagraph = new Paragraph("Directions : Read the sentences carefully. Choose the letter of the best answer. Write your answer before the number", font);
+		document.add(directionParagraph);
 		document.add(Chunk.NEWLINE);
 
 		// Questions
 		int[] itemNumber = { 1 };
 		questions.forEach(question -> {
-			Paragraph questionStr = new Paragraph(itemNumber[0] + ". " + question.getQuestion(), font);
+			Paragraph questionStr = new Paragraph("______" + itemNumber[0] + ". " + question.getQuestion(), font);
 			
 			// Create 2 columns in table.
 			PdfPTable table = new PdfPTable(2);
-			// Add cells in table
+			
+			// Add choices in table
 			table.addCell(this.convertToChoiceCell(new Paragraph("a) " + question.getA(), font)));
 			table.addCell(this.convertToChoiceCell(new Paragraph("b) " + question.getB(), font)));
 			table.addCell(this.convertToChoiceCell(new Paragraph("c) " + question.getC(), font)));
@@ -74,7 +84,7 @@ public class QuizPDFExporter {
 		font.setColor(Color.BLACK);
 		return font;
 	}
-
+	
 	private PdfPCell convertToChoiceCell(Paragraph paragraph) {
 		// Create cell
 		PdfPCell cell = new PdfPCell(paragraph);
