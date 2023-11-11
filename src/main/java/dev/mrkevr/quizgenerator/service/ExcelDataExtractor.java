@@ -11,11 +11,21 @@ import org.springframework.stereotype.Service;
 import com.poiji.bind.Poiji;
 
 import dev.mrkevr.quizgenerator.dto.Question;
+import dev.mrkevr.quizgenerator.exception.FileNotFoundException;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class ExcelDataExtractor {
 
+	private final FileUploader fileUploader;
+
 	public List<Question> extract(String fileName) {
+
+		if (!fileUploader.fileExists(fileName)) {
+			throw new FileNotFoundException(fileName);
+		}
+
 		Resource resource = new ClassPathResource("files/" + fileName + ".xlsx");
 		try {
 			File file = resource.getFile();

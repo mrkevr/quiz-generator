@@ -31,17 +31,6 @@ public class ApplicationController {
 	@PostMapping(value = "/upload", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
 	public ResponseEntity<HttpResponse> generate(@RequestParam("file") MultipartFile file, HttpServletResponse response)
 			throws IOException {
-
-		// File validation
-		if (file.isEmpty() || !file.getOriginalFilename().endsWith(".xlsx")) {
-			return ResponseEntity.badRequest().body(
-					HttpResponse.builder()
-					.timestamp(LocalDateTime.now())
-					.status(HttpStatus.BAD_REQUEST.value())
-					.message("Please upload an Excel(.xlsx) file.")
-					.build()
-					);
-		}
 		
 		// Upload
 		String fileId = fileUploader.uploadFile(file, UUID.randomUUID().toString());
@@ -59,15 +48,6 @@ public class ApplicationController {
 	public ResponseEntity<HttpResponse> downloadQuiz(@RequestParam(name = "id", required = true) String id, HttpServletResponse response)	
 			throws DocumentException, IOException {
 
-		if (!fileUploader.fileExists(id)) {
-			return ResponseEntity.badRequest().body(
-				HttpResponse.builder()
-				.timestamp(LocalDateTime.now())
-				.status(HttpStatus.BAD_REQUEST.value())
-				.message("No file found with that id")
-				.build());
-		}
-		
 		response.setContentType("application/pdf");
 		String headerKey = "Content-Disposition";
 		String headerValue = "attachment; filename=quiz_" + id + ".pdf";
