@@ -16,21 +16,21 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class ExcelDataExtractor {
-	
+
 	private final FileUploader fileUploader;
-	
+
 	@Value("${file.directory}")
 	private String UPLOAD_DIR;
-	
+
 	public List<Question> extract(String fileName) throws IOException {
 
 		if (!fileUploader.fileExists(fileName)) {
 			throw new FileNotFoundException(fileName);
 		}
 
-		//		Resource resource = new ClassPathResource("files/" + fileName + ".xlsx");
-		//			File file = resource.getFile();
-					File file = new File(UPLOAD_DIR + "/" + fileName + ".xlsx");
-					return Poiji.fromExcel(file, Question.class);
+		// Resource resource = new ClassPathResource("files/" + fileName + ".xlsx");
+		// File file = resource.getFile();
+		File file = new File(UPLOAD_DIR + "/" + fileName + ".xlsx");
+		return Poiji.fromExcel(file, Question.class);
 	}
 }

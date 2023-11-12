@@ -14,7 +14,7 @@ import dev.mrkevr.quizgenerator.exception.InvalidFileFormatException;
 public class ExceptionHandlerController {
 	
 	@ExceptionHandler(InvalidFileFormatException.class)
-	public ResponseEntity<?> handleNoSuchBeanException(InvalidFileFormatException ex) {
+	public ResponseEntity<?> handleInvalidFileFormatException(InvalidFileFormatException ex) {
 		
 		HttpErrorResponse response = new HttpErrorResponse(
 				LocalDateTime.now(), 
@@ -25,7 +25,7 @@ public class ExceptionHandlerController {
 	}
 	
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<?> handleNoSuchBeanException(Exception ex) {
+	public ResponseEntity<?> handleException(Exception ex) {
 		
 		HttpErrorResponse response = new HttpErrorResponse(
 				LocalDateTime.now(), 
