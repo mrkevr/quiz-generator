@@ -40,8 +40,8 @@ C:\Your\Directory\quiz-generator>mvn clean package -Dfile-directory=C:/Your/Dire
 > You have to a define a valid file directory when building, the application validates the directory on start up.
 - Once successfully built, you can run the jar file using one of these commands :
 ```
-java -jar quiz-generator-0.0.1-SNAPSHOT.jar --file.directory=C:/Your/Directory/UploadFolder
-java -jar quiz-generator-0.0.1-SNAPSHOT.jar --file.directory=C:/Your/Directory/UploadFolder --server.port=YourPort
+java -jar quiz-generator-0.0.1-SNAPSHOT.jar --file.directory=C:/Your/Directory/ExcelFilesFolder
+java -jar quiz-generator-0.0.1-SNAPSHOT.jar --file.directory=C:/Your/Directory/ExcelFilesFolder --server.port=YourPort
 ```
 > [!IMPORTANT]  
 > You have to a define a valid file directory, this is for storing excel files.
