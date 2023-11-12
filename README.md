@@ -84,5 +84,5 @@ http://localhost:8080/download?id=e814bb12-3580-45fc-89c9-3a554c01d0de
 ```
 http://localhost:8080/download?id=e814bb12-3580-45fc-89c9-3a554c01d0de&title=JAVA EXAMINATION 2023
 ```
-- If the file follows the correct format, you will get something like this :
+- If the file followed the correct format, there will be a prompt to save the file and it will look like this :
 ![questions_pdf](https://github.com/mrkevr/quiz-generator/assets/98044708/8efabe60-7dac-423a-aede-147235167ab9)
