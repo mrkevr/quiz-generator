@@ -24,7 +24,7 @@ This Spring Boot REST API project enables the conversion of Excel files into mul
 - For building and running the project, you need [Java 17](https://www.oracle.com/java/technologies/downloads/#java8](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)) and [Maven 3](https://maven.apache.org/download.cgi)
 - Build the project by running mvn clean package
 ```
-C:\Your\Directory\quiz-generator>mvn clean package
+C:\Your\Directory\quiz-generator>mvn clean package -Dfile-directory=C:/Your/Directory/ExcelFilesFolder
 ...
 ...
 ...
@@ -36,6 +36,8 @@ C:\Your\Directory\quiz-generator>mvn clean package
 [INFO] Finished at: 2023-11-11T22:23:52+08:00
 [INFO] ------------------------------------------------------------------------
 ```
+> [!IMPORTANT]  
+> You have to a define a valid file directory when building, the application validates the directory on start up.
 - Once successfully built, you can run the jar file using one of these commands :
 ```
 java -jar quiz-generator-0.0.1-SNAPSHOT.jar --file.directory=C:/Your/Directory/UploadFolder
