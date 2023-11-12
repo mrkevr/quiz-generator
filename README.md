@@ -4,6 +4,8 @@ Convert Excel files to Multiple Choice Exam PDF
 - [Introduction](#introduction)
 - [Dependencies](#dependencies)
 - [How To Run](#how-to-run)
+- [Uploading Excel File](#uploading-excel-file)
+- [Downloading Quiz Document](#downloading-quiz-dicument)
 
 ## Introduction
 This Spring Boot REST API project enables the conversion of Excel files into multiple-choice exam PDFs. Users can upload Excel files, and the API processes the data to generate a formatted PDF document with multiple-choice questions. It leverages Spring Boot for the backend, offering a straightforward and efficient solution for transforming Excel data into printable quiz/exam paper.
@@ -50,3 +52,16 @@ java -jar quiz-generator-0.0.1-SNAPSHOT.jar --file.directory=C:/Your/Directory/U
 2023-11-11T14:33:27.371+08:00  INFO 7736 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
 2023-11-11T14:33:27.390+08:00  INFO 7736 --- [main] d.m.q.QuizGeneratorApplication           : Started QuizGeneratorApplication in 2.722 seconds (process running for 3.218)
 ```
+- This application defines the following endpoints
+```
+http://localhost:8080/upload
+http://localhost:8080/download
+```
+## Uploading Excel File
+Prepare questionnaires following this format
+
+
+
+
+
+## Downloading Quiz Document
