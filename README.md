@@ -19,8 +19,8 @@ This Spring Boot REST API project enables the conversion of Excel files into mul
 
 ## How To Run
 - Clone the repository
-- Make sure you are using Java 17 and Maven 3
-- You can build the project by running mvn clean package
+- For building and running the project, you need [Java 17](https://www.oracle.com/java/technologies/downloads/#java8](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)) and [Maven 3](https://maven.apache.org/download.cgi)
+- Build the project by running mvn clean package
 ```
 C:\Your\Directory\quiz-generator>mvn clean package
 ...
