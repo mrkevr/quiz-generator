@@ -13,7 +13,7 @@ This Spring Boot REST API project enables the conversion of Excel files into mul
 ## Dependencies
 | Dependency | Purpose |
 | ------------- | ------------- |
-| [Spring Boot](https://spring.io/projects/spring-boot) | Spring Boot forms the backbone of this application, offering a robust and efficient framework for building the server-side components of this e-commerce platform. It simplifies configuration, enhances 
+| [Spring Boot](https://spring.io/projects/spring-boot) | Spring Boot is an open source Java-based framework used to create microservices. It is developed by Pivotal Team and is used to build stand-alone and production-ready applications.
 | [Lombok](https://projectlombok.org) | Lombok is a library for Java that can significantly simplify and streamline your Java code by automatically generating common boilerplate code. |
 | [Poiji](https://github.com/ozlerhakan/poiji) | Poiji is a tiny thread-safe Java library that provides one way mapping from Excel sheets to Java classes. In a way it lets us convert each row of the specified excel data into Java objects. Poiji uses Apache Poi (the Java API for Microsoft Documents) under the hood to fulfill the mapping process. |
 | [OpenPDF](https://github.com/LibrePDF/OpenPDF) | OpenPDF is a Java library for creating and editing PDF files with a LGPL and MPL open source license. OpenPDF is the LGPL/MPL open source successor of iText, and is based on some forks of iText 4 svn tag. |
