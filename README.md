@@ -36,11 +36,11 @@ C:\Your\Directory\quiz-generator>mvn clean package
 ```
 - Once successfully built, you can run the jar file using one of these commands :
 ```
-java -jar quiz-generator-0.0.1-SNAPSHOT.jar --file.directory=C:/Your/File/Directory
-java -jar quiz-generator-0.0.1-SNAPSHOT.jar --file.directory=C:/Your/File/Directory --server.port=YourPort
+java -jar quiz-generator-0.0.1-SNAPSHOT.jar --file.directory=C:/Your/Directory/UploadFolder
+java -jar quiz-generator-0.0.1-SNAPSHOT.jar --file.directory=C:/Your/Directory/UploadFolder --server.port=YourPort
 ```
 > [!IMPORTANT]  
-> You have to a define a valid file directory.
+> You have to a define a valid file directory, this is for storing excel files.
 
 > [!NOTE]  
 > The application will run on port 8080 if not defined in the command.
