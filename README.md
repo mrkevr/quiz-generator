@@ -1,4 +1,5 @@
 # Quiz Generator
+![quiz-generator-thumbnail](https://github.com/mrkevr/e-commerce/assets/98044708/9ec411c2-0da8-4e0e-a1f2-77c03503d82c)
 Convert Excel files to Multiple Choice Exam PDF
 
 - [Introduction](#introduction)
